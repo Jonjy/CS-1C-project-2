@@ -1,6 +1,8 @@
 # CS-1C-project-2
 
-#repo for the first project for project 22
+repo for the first project for project 22
+
+# i figured out bold
 
 ![alt text](https://b50ym1n8ryw31pmkr4671ui1c64-wpengine.netdna-ssl.com/wp-content/blogs.dir/11/files/2018/04/Red-Fox-Beverly-Davis-Blog-1600x1000-1024x640.png)
 
