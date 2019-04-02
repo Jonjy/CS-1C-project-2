@@ -8,4 +8,4 @@ repo for the second project for 1C
 [![Trello board](https://img.shields.io/badge/Trello-click%20here-magenta.svg)](https://trello.com/invite/b/cbXb2Hyn/5afc33e5d626eafa9aa5f060e5850410/cs-1c-project-2)
 
 
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/Jonjy/CS-c1-project1.svg?columns=all&logoColor=FF00F0)](https://trello.com/invite/b/cbXb2Hyn/5afc33e5d626eafa9aa5f060e5850410/cs-1c-project-2)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/Jonjy/CS-c1-project1.svg?columns=all&logoColor=FF0FF0)](https://trello.com/invite/b/cbXb2Hyn/5afc33e5d626eafa9aa5f060e5850410/cs-1c-project-2)
