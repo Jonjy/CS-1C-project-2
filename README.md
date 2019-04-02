@@ -11,4 +11,4 @@ trello instead of waffle, cause waffles is dying
 
 Agile Stories
 
-https://docs.google.com/document/d/1Mg19V8QaftvOZn0IrtpWdHYZlV_C2t3KUL1RitczVfA/edit
+https://docs.google.com/document/d/1Mg19V8QaftvOZn0IrtpWdHYZlV_C2t3KUL1RitczVfA/edit?usp=sharing
