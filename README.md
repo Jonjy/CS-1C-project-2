@@ -4,11 +4,8 @@
 repo for the second project for 1C
 
 [![Artifacts Folder](https://img.shields.io/badge/Artifacts-Click%20here%20to%20view%20folder%20-purple.svg)](https://drive.google.com/drive/folders/1_-r4STmzUH5EgukhIf9RD95rRnRgA2pC?usp=sharing)
+[![](https://img.shields.io/badge/User%20Stories-click%20here-blue.svg)](https://docs.google.com/document/d/1Mg19V8QaftvOZn0IrtpWdHYZlV_C2t3KUL1RitczVfA/edit?usp=sharing)
 
 trello instead of waffle, cause waffles is dying
 
 [![Trello board](https://img.shields.io/badge/Trello-click%20here-magenta.svg)](https://trello.com/invite/b/cbXb2Hyn/5afc33e5d626eafa9aa5f060e5850410/cs-1c-project-2)
-
-Agile Stories
-
-[![](https://img.shields.io/badge/User%20Stories-click%20here-blue.svg)](https://docs.google.com/document/d/1Mg19V8QaftvOZn0IrtpWdHYZlV_C2t3KUL1RitczVfA/edit?usp=sharing)
