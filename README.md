@@ -1,4 +1,4 @@
-# Functional Foxes[(https://trello.com/invite/b/cbXb2Hyn/5afc33e5d626eafa9aa5f060e5850410/cs-1c-project-2)]
+# Functional Foxes
 ![alt text](https://b50ym1n8ryw31pmkr4671ui1c64-wpengine.netdna-ssl.com/wp-content/blogs.dir/11/files/2018/04/Red-Fox-Beverly-Davis-Blog-1600x1000-1024x640.png)
 
 repo for the second project for 1C
