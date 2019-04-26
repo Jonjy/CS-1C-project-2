@@ -39,9 +39,9 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>750</x>
+        <x>740</x>
         <y>330</y>
-        <width>221</width>
+        <width>241</width>
         <height>171</height>
        </rect>
       </property>
@@ -83,32 +83,6 @@ background-color: rgb(255, 255, 255);</string>
        </property>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>140</y>
-         <width>75</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Login</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="geometry">
-        <rect>
-         <x>110</x>
-         <y>140</y>
-         <width>75</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Exit</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_2">
@@ -153,6 +127,39 @@ background-color: rgb(255, 255, 255);</string>
        <property name="text">
         <string/>
        </property>
+      </widget>
+      <widget class="QWidget" name="horizontalLayoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>120</y>
+         <width>241</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="pushButton_10">
+          <property name="text">
+           <string>Admin</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Manger</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>Exit</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </widget>
@@ -219,10 +226,30 @@ background-color: rgb(255, 255, 255);</string>
         <x>30</x>
         <y>519</y>
         <width>981</width>
-        <height>41</height>
+        <height>51</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <spacer name="horizontalSpacer_9">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_13">
+         <property name="text">
+          <string>Stock Screen</string>
+         </property>
+        </widget>
+       </item>
        <item>
         <spacer name="horizontalSpacer_6">
          <property name="orientation">
@@ -297,6 +324,33 @@ background-color: rgb(255, 255, 255);</string>
         </spacer>
        </item>
        <item>
+        <widget class="QPushButton" name="pushButton_12">
+         <property name="text">
+          <string>Regular Sales</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_11">
+         <property name="text">
+          <string>Executive sales</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="horizontalSpacer_11">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -317,7 +371,7 @@ background-color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item>
-        <spacer name="horizontalSpacer_9">
+        <spacer name="horizontalSpacer_2">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -376,6 +430,29 @@ background-color: rgb(255, 255, 255);</string>
        </item>
        <item>
         <spacer name="verticalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>Select Item:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox"/>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
