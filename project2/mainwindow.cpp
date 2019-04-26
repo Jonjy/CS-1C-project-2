@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->stackedWidget->setCurrentIndex(0);
+
     /*
     if(!mydb.open())
         qDebug()<<"error opening database\n";
@@ -43,7 +45,7 @@ void MainWindow::on_pushButton_clicked()
     QString pass = ui->lineEdit->text();
 
     if(pass == "password"){
-        ui->stackedWidget->setCurrentIndex(1);
+        ui->stackedWidget->setCurrentIndex(3);
         ui->lineEdit->clear();
         ui->label_4->clear();
     }
@@ -67,7 +69,7 @@ void MainWindow::on_pushButton_5_clicked()
 {
     //connect();
 
-    ui->stackedWidget->setCurrentIndex(2);
+    ui->stackedWidget->setCurrentIndex(3);
 }
 
 void MainWindow::on_pushButton_6_clicked() //delete user from database
