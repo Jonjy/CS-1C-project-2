@@ -1,15 +1,14 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-04-08T17:01:45
+# Project created by QtCreator 2019-04-03T15:25:23
 #
 #-------------------------------------------------
 
-QT       += core gui
-QT       += sql
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = stuff
+TARGET = project2
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -26,8 +25,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    main.cpp
 
 HEADERS += \
         mainwindow.h
@@ -40,5 +39,5 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    photos/bulkclub.jpeg
+RESOURCES += \
+    resource.qrc
