@@ -30,7 +30,7 @@
      <string notr="true">background-image: url(:/photos/photos/SQL_Banner.jpg);</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="page">
      <property name="styleSheet">
