@@ -18,7 +18,9 @@ public:
     QSqlDatabase mydb;
     bool opendb(){
         QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
-        mydb.setDatabaseName("C:/Users/Cam/Downloads/sales.db");
+        mydb.setDatabaseName("sales.db.db");
+        //mydb.setDatabaseName("C:/Users/Cam/Downloads/sales.db");
+
 
         if(!mydb.open()){
             qDebug()<<"error opening database\n";
@@ -83,6 +85,16 @@ private slots:
     void on_pushButton_21_clicked();
 
     void on_pushButton_22_clicked();
+	
+	 void managerLogin();
+
+    void daySelect();
+
+    void idSelect();
+
+    void itemSelect();
+
+    void statusSelect();
 
     void on_pushButton_23_clicked();
 
@@ -90,6 +102,18 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    void manTablefill();
+
+    void dayCombo();
+
+    void idCombo();
+
+    void itemCombo();
+
+    void statusCombo();
+
+    void tableMake(QSqlQuery * qry);
 
 };
 

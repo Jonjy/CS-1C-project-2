@@ -52,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent) :
     for(i = timestruct.tm_year + 1900; i<timestruct.tm_year+1906; i++){
         ui->comboBox_8->addItem(QString::number(i));//year
     }
+    ui->stackedWidget->setCurrentIndex(0);
 
 }
 
@@ -475,3 +476,145 @@ void MainWindow::on_pushButton_24_clicked()
     ui->stackedWidget->setCurrentIndex(3);
 
 }
+
+void MainWindow::managerLogin(){
+    if(ui->lineEdit->text() != "pass"){
+        QMessageBox::information(this, "Error",
+                            "Incorrect user name or password",
+                            QMessageBox::Ok);
+        return;
+    }
+
+
+    ui->stackedWidget->setCurrentIndex(2);
+    opendb();
+
+    dayCombo();
+
+    idCombo();
+
+    itemCombo();
+
+    QSqlQuery * qry = new QSqlQuery(mydb);
+    QString item = ui->ItemBox->currentText();
+
+
+    qry->prepare("select * from sales");
+
+    qry->exec();
+
+    tableMake(qry);
+}
+
+void MainWindow::tableMake(QSqlQuery * qry){
+    QSqlQueryModel * modal = new QSqlQueryModel();
+
+    modal->setQuery(*qry);
+    ui->managerView->setModel(modal);
+
+    qDebug() << (modal->rowCount());
+    ui->managerView->setColumnWidth(0,100);
+    ui->managerView->setColumnWidth(1,75);
+    ui->managerView->setColumnWidth(2,200);
+    ui->managerView->setColumnWidth(3,75);
+}
+
+void MainWindow::dayCombo(){
+    ui->DayBox->addItem("Select Day");
+    ui->DayBox->addItem("Day 1");
+    ui->DayBox->addItem("Day 2");
+    ui->DayBox->addItem("Day 3");
+    ui->DayBox->addItem("Day 4");
+    ui->DayBox->addItem("Day 5");
+    ui->DayBox->addItem("Day 6");
+    ui->DayBox->addItem("Day 7");
+    return;
+}
+
+
+void MainWindow::idCombo(){
+    QSqlQuery * qry = new QSqlQuery(mydb);
+
+    QSqlQueryModel * combo = new QSqlQueryModel();
+
+    qry->prepare("select ID from customers ORDER BY ID ASC");
+    qry->exec();
+
+    combo->setQuery(*qry);
+
+    ui->IDBox->setModel(combo);
+}
+
+void MainWindow::itemCombo(){
+    QSqlQuery * qry = new QSqlQuery(mydb);
+
+    QSqlQueryModel * combo = new QSqlQueryModel();
+
+    qry->prepare("select Item from stock");
+    qry->exec();
+
+    combo->setQuery(*qry);
+
+    ui->ItemBox->setModel(combo);
+
+}
+
+void MainWindow::statusCombo(){
+    ui->DayBox->addItem("All Customers");
+    ui->DayBox->addItem("Executive");
+    ui->DayBox->addItem("Regular");
+}
+
+void MainWindow::daySelect(){
+
+    QSqlQuery * qry = new QSqlQuery(mydb);
+    QString day = ui->DayBox->currentText();
+
+    if(day == "Select Day"){
+        qry->prepare("select * from sales");
+    }else{
+        day=day.at(4);
+        qry->prepare("select * from sales WHERE day = '"+day+"'");
+    }
+    qry->exec();
+
+    tableMake(qry);
+}
+
+void MainWindow::idSelect(){
+
+    QSqlQuery * qry = new QSqlQuery(mydb);
+    QString id = ui->IDBox->currentText();
+
+
+    qry->prepare("select * from sales WHERE ID = '"+id+"'");
+
+    qry->exec();
+
+    tableMake(qry);
+}
+
+void MainWindow::itemSelect(){
+    QSqlQuery * qry = new QSqlQuery(mydb);
+    QString item = ui->ItemBox->currentText();
+
+
+    qry->prepare("select * from sales WHERE Product = '"+item+"'");
+
+    qry->exec();
+
+    tableMake(qry);
+}
+
+void MainWindow::statusSelect(){
+    QSqlQuery * qry = new QSqlQuery(mydb);
+    QString item = ui->ItemBox->currentText();
+
+
+    qry->prepare("select * from sales WHERE Product = '"+item+"'");
+
+    qry->exec();
+
+    tableMake(qry);
+}
+
