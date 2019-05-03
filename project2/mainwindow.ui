@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="page">
      <property name="styleSheet">
@@ -141,14 +141,14 @@ background-color: rgb(255, 255, 255);</string>
         <item>
          <widget class="QPushButton" name="pushButton_10">
           <property name="text">
-           <string>Admin</string>
+           <string>Manager</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="pushButton">
           <property name="text">
-           <string>Manger</string>
+           <string>Admin</string>
           </property>
          </widget>
         </item>
@@ -210,7 +210,7 @@ background-color: rgb(255, 255, 255);</string>
      </widget>
     </widget>
     <widget class="QWidget" name="manager">
-     <widget class="QTableView" name="tableView">
+     <widget class="QTableView" name="managerView">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -449,7 +449,7 @@ background-color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox"/>
+        <widget class="QComboBox" name="ItemBox"/>
        </item>
        <item>
         <spacer name="verticalSpacer">
@@ -467,12 +467,12 @@ background-color: rgb(255, 255, 255);</string>
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Name</string>
+          <string>Status</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="NameEdit"/>
+        <widget class="QComboBox" name="comboBox"/>
        </item>
        <item>
         <spacer name="verticalSpacer_4">
@@ -742,5 +742,93 @@ background-color: rgb(255, 255, 255);</string>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_10</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>managerLogin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>775</x>
+     <y>487</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>733</x>
+     <y>580</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>DayBox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>daySelect()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>859</x>
+     <y>78</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1004</x>
+     <y>105</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>IDBox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>idSelect()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>882</x>
+     <y>154</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1004</x>
+     <y>216</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ItemBox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>itemSelect()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>904</x>
+     <y>235</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1005</x>
+     <y>281</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>statusSelect()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>898</x>
+     <y>314</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1006</x>
+     <y>350</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>managerLogin()</slot>
+  <slot>daySelect()</slot>
+  <slot>idSelect()</slot>
+  <slot>itemSelect()</slot>
+  <slot>statusSelect()</slot>
+ </slots>
 </ui>
