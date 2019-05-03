@@ -1,5 +1,10 @@
 <RCC>
     <qresource prefix="/photos">
         <file>photos/bulkclub.jpeg</file>
+        <file>photos/garage.jpeg</file>
+        <file>photos/database-free-download-png-5a22aad4e16b56.2847272415122213969233.jpg</file>
+        <file>photos/SQL_Banner.jpg</file>
+        <file>photos/abstract-background-with-technology-high-speed-concept_44392-184.jpg</file>
+        <file>photos/50-Beautiful-and-Minimalist-Presentation-Backgrounds-022.jpg</file>
     </qresource>
 </RCC>
