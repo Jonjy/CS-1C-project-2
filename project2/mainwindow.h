@@ -19,6 +19,8 @@ public:
     bool opendb(){
         QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
         mydb.setDatabaseName("sales.db.db");
+        //mydb.setDatabaseName("C:/Users/Cam/Downloads/sales.db");
+
 
         if(!mydb.open()){
             qDebug()<<"error opening database\n";
@@ -35,6 +37,10 @@ public:
         mydb.removeDatabase(QSqlDatabase::defaultConnection);
     }
 
+    void refreshcustomerdb();
+    void refreshitemdb();
+
+public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
@@ -58,7 +64,29 @@ private slots:
 
     void on_pushButton_9_clicked();
 
-    void managerLogin();
+    void on_pushButton_11_clicked();
+
+    void on_pushButton_12_clicked();
+
+    void on_pushButton_14_clicked();
+
+    void on_pushButton_15_clicked();
+
+    void on_pushButton_16_clicked();
+
+    void on_pushButton_17_clicked();
+
+    void on_pushButton_18_clicked();
+
+    void on_pushButton_19_clicked();
+
+    void on_pushButton_20_clicked();
+
+    void on_pushButton_21_clicked();
+
+    void on_pushButton_22_clicked();
+	
+	 void managerLogin();
 
     void daySelect();
 
