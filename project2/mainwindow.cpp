@@ -5,34 +5,106 @@
 #include <QDebug>
 #include <ctime>
 
+/*NOTES*
+ *make selecting membership a dropdown box
+ *for deleting users make that a dropdown box
+ *for deleting items make that a dropdown box
+ *make updating/viewing the tables a function of MainWindow with model as a member variable
+ *           and call that function whenever the admin page is opened and delete the member variable
+ *           when back is pressed.
+ *the should convert requirement - calc rebate and see if they save and then suggest an upgrade if they will save
+ */
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->comboBox_3->addItem("Regular");
+    ui->comboBox_3->addItem("Executive");
 
-    /*
-    if(!mydb.open())
-        qDebug()<<"error opening database\n";
-    else
-        qDebug()<<"database opened\n";
-     */
+    ui->comboBox_5->addItem("Regular");
+    ui->comboBox_5->addItem("Executive");
 
-    //using style sheet instead of QPixmap. Add (background:rgba(255,255,255,.2)) to stylesheet of groupbox to avoid issues
-/*
-    QPixmap bkgnd("C:/Users/Cam/Documents/project2/photos/bulkclub");
-    bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    this->setPalette(palette);
-*/
+    int i;
+    for(i = 0; i < 12; i++){
+        if(i<9){
+            ui->comboBox_6->addItem("0" +QString::number(i + 1));//month
+        }
+        else{
+            ui->comboBox_6->addItem(QString::number(i + 1));//month
+        }
+    }
+    for (i = 0; i < 31; i++){
+       if(i<9){
+           ui->comboBox_7->addItem("0" +QString::number(i + 1));//month
+       }
+       else{
+        ui->comboBox_7->addItem(QString::number(i + 1));//day
+       }
+    }
+
+    time_t current = time(nullptr);
+    tm timestruct;
+    localtime_s(&timestruct, &current);
+    for(i = timestruct.tm_year + 1900; i<timestruct.tm_year+1906; i++){
+        ui->comboBox_8->addItem(QString::number(i));//year
+    }
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::refreshcustomerdb(){
+    MainWindow db;
+    QSqlQueryModel * model = new QSqlQueryModel();
+
+    db.opendb();
+    QSqlQuery * qry = new QSqlQuery(db.mydb);
+
+    qry->prepare("select * from customers"); //* selects all
+
+    qry->exec();
+    model->setQuery(*qry);
+
+    if(ui->stackedWidget->currentIndex()==2){
+        ui->tableView->setModel(model);
+        ui->comboBox_2->setModel(model);
+    }
+    if(ui->stackedWidget->currentIndex()==3){
+        ui->tableView_2->setModel(model);
+        ui->comboBox_4->setModel(model);
+    }
+    db.closedb();
+}
+
+void MainWindow::refreshitemdb(){
+    MainWindow db;
+    QSqlQueryModel * model = new QSqlQueryModel();
+
+    db.opendb();
+    QSqlQuery * qry = new QSqlQuery(db.mydb);
+
+    qry->prepare("select * from stock"); //* selects all
+
+    qry->exec();
+    model->setQuery(*qry);
+
+    if(ui->stackedWidget->currentIndex()==2){
+        ui->tableView->setModel(model);
+        ui->comboBox->setModel(model);
+    }
+    if(ui->stackedWidget->currentIndex()==3){
+        ui->tableView_2->setModel(model);
+        //ui->comboBox_5->setModel(model);
+    }
+
+    db.closedb();
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -45,7 +117,7 @@ void MainWindow::on_pushButton_clicked()
     QString pass = ui->lineEdit->text();
 
     if(pass == "password"){
-        ui->stackedWidget->setCurrentIndex(3);
+        ui->stackedWidget->setCurrentIndex(1);
         ui->lineEdit->clear();
         ui->label_4->clear();
     }
@@ -67,16 +139,14 @@ void MainWindow::on_pushButton_4_clicked()
 
 void MainWindow::on_pushButton_5_clicked()
 {
-    //connect();
+    ui->stackedWidget->setCurrentIndex(2);
 
-    ui->stackedWidget->setCurrentIndex(3);
 }
 
 void MainWindow::on_pushButton_6_clicked() //delete user from database
 {
     MainWindow db;
-    QString name = ui->lineEdit_2->text();
-    ui->lineEdit_2->clear();
+    QString name = ui->comboBox_2->currentText();
 
     if(!db.opendb()){
         qDebug()<<"Failed to open database";
@@ -87,8 +157,16 @@ void MainWindow::on_pushButton_6_clicked() //delete user from database
 
     db.opendb();
     QSqlQuery qry;
+
+    qry.prepare("SELECT * FROM customers WHERE name = '"+name+"'");
+    qry.exec();
+    if(qry.isNull(qry.first())){
+        QMessageBox::critical(this, tr("Delete"),tr("Name not found"));
+        db.closedb();
+        return;
+    }
+
     qry.prepare("DELETE FROM customers WHERE name = '"+name+"' ");
-    //select * from customers where Name = "Fred Frugal"
 
     if(qry.exec()){
         QMessageBox::critical(this, tr("Delete"),tr("Deleted"));
@@ -97,24 +175,7 @@ void MainWindow::on_pushButton_6_clicked() //delete user from database
     else{
         QMessageBox::critical(this, tr("error::"), qry.lastError().text());
     }
-
-    /*
-    //Connecting to databse
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Users/Cam/Downloads/datastuff.db");
-    if(!db.open())
-        qDebug()<<"failed to open database";
-    //
-
-    QString id = ui->lineEdit_2->text();
-    //close database -> db.close()  and   db.removeDatabase(QSqlDatabase::defaultConnection)
-
-    QSqlQuery qry;
-    qry.prepare("Delete from customers ID Number = '"+id+"' ");
-
-    //db.close();
-    //db.removeDatabase(QSqlDatabase::defaultConnection);
-    */
+    refreshcustomerdb();
 }
 
 void MainWindow::on_pushButton_7_clicked()
@@ -126,17 +187,15 @@ void MainWindow::on_pushButton_8_clicked()//add member
 {
     QString name = ui->lineEdit_3->text();
     QString id = ui->lineEdit_4->text();
-    QString membership = ui->lineEdit_5->text();
-    //QString date = ui->label_6->text();
+    QString membership = ui->comboBox_3->currentText();
 
     ui->lineEdit_3->clear();
     ui->lineEdit_4->clear();
-    ui->lineEdit_5->clear();
 
     time_t current = time(nullptr);
     tm timestruct;
     localtime_s(&timestruct, &current);
-    QString date = QString::number(timestruct.tm_mon + 1) + "/" + QString::number(timestruct.tm_mday) + "/" + QString::number(timestruct.tm_year + 1900);
+    QString date = QString::number(timestruct.tm_mon + 1) + "/" + QString::number(timestruct.tm_mday) + "/" + QString::number(timestruct.tm_year + 1901);
 
     MainWindow db;
 
@@ -149,7 +208,7 @@ void MainWindow::on_pushButton_8_clicked()//add member
 
     db.opendb();
     QSqlQuery qry;
-    qry.prepare("INSERT INTO customers (name,id,status,join_date) values ('"+name+"','"+id+"', '"+membership+"', '"+date+"') ");
+    qry.prepare("INSERT INTO customers (name,ID,status,expiration) values ('"+name+"','"+id+"', '"+membership+"', '"+date+"') ");
 
     if(qry.exec()){
         QMessageBox::critical(this, tr("Add"),tr("Entry added"));
@@ -158,10 +217,10 @@ void MainWindow::on_pushButton_8_clicked()//add member
     else{
         QMessageBox::critical(this, tr("Error"),qry.lastError().text());
     }
-
+    refreshcustomerdb();
 }
 
-void MainWindow::on_pushButton_9_clicked()
+void MainWindow::on_pushButton_9_clicked()//table view of customer database
 {
     MainWindow db;
     QSqlQueryModel * model = new QSqlQueryModel();
@@ -175,6 +234,214 @@ void MainWindow::on_pushButton_9_clicked()
     model->setQuery(*qry);
 
     ui->tableView->setModel(model);
+    ui->comboBox_2->setModel(model);
 
     db.closedb();
+}
+
+void MainWindow::on_pushButton_11_clicked()//table view of item database
+{
+    MainWindow db;
+    QSqlQueryModel * model = new QSqlQueryModel();
+
+    db.opendb();
+    QSqlQuery * qry = new QSqlQuery(db.mydb);
+
+    qry->prepare("select * from stock"); //* selects all
+
+    qry->exec();
+    model->setQuery(*qry);
+
+    ui->tableView->setModel(model);
+    ui->comboBox->setModel(model);
+
+    db.closedb();
+}
+
+void MainWindow::on_pushButton_12_clicked() //adding item
+{
+    MainWindow db;
+    QString item, amount, price;
+    item = ui->lineEdit_6->text();
+    amount = ui->lineEdit_7->text();
+    price = ui->lineEdit_8->text();
+
+    ui->lineEdit_6->clear();
+    ui->lineEdit_7->clear();
+    ui->lineEdit_8->clear();
+
+    if(db.opendb()){qDebug()<< "database opened"; }
+    else {qDebug()<<"database failed to open";}
+    db.closedb();
+
+    db.opendb();
+    QSqlQuery query;
+
+    query.prepare("insert into stock (Item, count, price) values ('"+item+"', '"+amount+"', '"+price+"')");
+
+    if(query.exec()){
+        qDebug()<<"Changes Made";
+        db.closedb();
+    }
+    else{qDebug()<<"Changes failed";
+    query.lastError();
+    }
+    refreshitemdb();
+}
+
+void MainWindow::on_pushButton_14_clicked() //delete item
+{
+    MainWindow db;
+    QString item = ui->comboBox->currentText();
+
+    if(!db.opendb()){
+        qDebug()<<"Failed to open database";
+        db.closedb();
+        return;
+    }
+    db.closedb();
+
+    db.opendb();
+    QSqlQuery qry;
+
+    qry.prepare("DELETE FROM stock WHERE Item = '"+item+"' ");
+
+    if(qry.exec()){
+        QMessageBox::critical(this, tr("Delete"),tr("Deleted"));
+        db.closedb();
+    }
+    else{
+        QMessageBox::critical(this, tr("error::"), qry.lastError().text());
+    }
+    refreshitemdb();
+}
+
+void MainWindow::on_pushButton_15_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+}
+
+void MainWindow::on_pushButton_16_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+}
+
+void MainWindow::on_pushButton_17_clicked()
+{
+    refreshitemdb();
+}
+
+void MainWindow::on_pushButton_18_clicked()
+{
+    refreshcustomerdb();
+}
+
+void MainWindow::on_pushButton_19_clicked()//edit name
+{
+    QString oldname = ui->comboBox_4->currentText();
+    QString newname = ui->lineEdit_2->text();
+    MainWindow db;
+
+    if(!db.opendb()){
+        qDebug()<<"Failed to open database";
+        db.closedb();
+        return;
+    }
+    db.closedb();
+
+    db.opendb();
+    QSqlQuery qry;
+
+    qry.prepare("UPDATE customers SET name = '"+newname+"' WHERE name = '"+oldname+"' ");
+
+    if(qry.exec()){
+        db.closedb();
+    }
+    else{
+        QMessageBox::critical(this, tr("error::"), qry.lastError().text());
+    }
+    refreshcustomerdb();
+    ui->lineEdit_2->clear();
+}
+
+void MainWindow::on_pushButton_20_clicked()//edit id
+{
+    QString name = ui->comboBox_4->currentText();
+    QString id = ui->lineEdit_5->text();
+    MainWindow db;
+
+    if(!db.opendb()){
+        qDebug()<<"Failed to open database";
+        db.closedb();
+        return;
+    }
+    db.closedb();
+
+    db.opendb();
+    QSqlQuery qry;
+
+    qry.prepare("UPDATE customers SET ID = '"+id+"' WHERE name = '"+name+"' ");
+
+    if(qry.exec()){
+        db.closedb();
+    }
+    else{
+        QMessageBox::critical(this, tr("error::"), qry.lastError().text());
+    }
+    refreshcustomerdb();
+    ui->lineEdit_5->clear();
+}
+
+void MainWindow::on_pushButton_21_clicked()//edit status
+{
+    QString name = ui->comboBox_5->currentText();
+    QString status = ui->lineEdit_5->text();
+    MainWindow db;
+
+    if(!db.opendb()){
+        qDebug()<<"Failed to open database";
+        db.closedb();
+        return;
+    }
+    db.closedb();
+
+    db.opendb();
+    QSqlQuery qry;
+
+    qry.prepare("UPDATE customers SET status = '"+status+"' WHERE name = '"+name+"' ");
+
+    if(qry.exec()){
+        db.closedb();
+    }
+    else{
+        QMessageBox::critical(this, tr("error::"), qry.lastError().text());
+    }
+    refreshcustomerdb();
+}
+
+void MainWindow::on_pushButton_22_clicked()
+{
+    QString name = ui->comboBox_5->currentText();
+
+    QString month = ui->comboBox_6->currentText();
+    QString day = ui->comboBox_7->currentText();
+    QString year = ui->comboBox_8->currentText();
+    QString exp = month + "/" + day + "/" + year;
+
+    MainWindow db;
+    db.opendb();
+    QSqlQuery qry;
+
+    qry.prepare("UPDATE customers SET expiration = '"+exp+"' WHERE name = '"+name+"' ");
+
+    if(qry.exec()){
+        db.closedb();
+    }
+    else{
+        QMessageBox::critical(this, tr("error::"), qry.lastError().text());
+    }
+    refreshcustomerdb();
+    ui->comboBox_6->setCurrentIndex(0);
+    ui->comboBox_7->setCurrentIndex(0);
+    ui->comboBox_8->setCurrentIndex(0);
 }
