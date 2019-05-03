@@ -52,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent) :
     for(i = timestruct.tm_year + 1900; i<timestruct.tm_year+1906; i++){
         ui->comboBox_8->addItem(QString::number(i));//year
     }
+    ui->stackedWidget->setCurrentIndex(0);
 
 }
 
