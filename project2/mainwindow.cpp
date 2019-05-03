@@ -445,3 +445,33 @@ void MainWindow::on_pushButton_22_clicked()
     ui->comboBox_7->setCurrentIndex(0);
     ui->comboBox_8->setCurrentIndex(0);
 }
+
+void MainWindow::on_pushButton_23_clicked()
+{
+   ui->stackedWidget->setCurrentIndex(4);
+   //ASSUME THERE IS A COLUMN IN SQL CALLED rebate AND runningTotal//
+   //if an exec is not getting more than 55 dollars in rebate they should swap to regular
+
+
+   MainWindow db;
+   QSqlQueryModel * model = new QSqlQueryModel();
+
+   db.opendb();
+   QSqlQuery * qry = new QSqlQuery(db.mydb);
+
+   qry->prepare("select * from customers where (status = 'Executive') AND (rebate<55) "); //* selects all
+
+   qry->exec();
+   model->setQuery(*qry);
+
+   ui->tableView_3->setModel(model);//regular to exec
+
+   db.closedb();
+
+}
+
+void MainWindow::on_pushButton_24_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+
+}
