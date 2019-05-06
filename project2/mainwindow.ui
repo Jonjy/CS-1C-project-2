@@ -27,10 +27,10 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/photos/photos/SQL_Banner.jpg);</string>
+     <string notr="true">background-image: url(:/photos/photos/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg);</string>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="page">
      <property name="styleSheet">
@@ -272,17 +272,17 @@ background-color: rgb(255, 255, 255);</string>
      <widget class="QPushButton" name="pushButton_7">
       <property name="geometry">
        <rect>
-        <x>900</x>
-        <y>530</y>
-        <width>75</width>
-        <height>23</height>
+        <x>830</x>
+        <y>520</y>
+        <width>81</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">background:rgba(255,255,255,.5);</string>
       </property>
       <property name="text">
-       <string>back</string>
+       <string>Back</string>
       </property>
      </widget>
      <widget class="QGroupBox" name="groupBox_2">
@@ -1063,22 +1063,22 @@ color: rgb(255, 255, 255);</string>
      <widget class="QPushButton" name="pushButton_15">
       <property name="geometry">
        <rect>
-        <x>954</x>
-        <y>210</y>
-        <width>41</width>
-        <height>101</height>
+        <x>920</x>
+        <y>520</y>
+        <width>71</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>26</pointsize>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="styleSheet">
        <string notr="true">background:rgba(255,255,255,.5);</string>
       </property>
       <property name="text">
-       <string>&gt;</string>
+       <string>Next</string>
       </property>
      </widget>
     </widget>
@@ -1086,22 +1086,22 @@ color: rgb(255, 255, 255);</string>
      <widget class="QPushButton" name="pushButton_16">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>220</y>
-        <width>41</width>
-        <height>101</height>
+        <x>830</x>
+        <y>520</y>
+        <width>81</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>26</pointsize>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="styleSheet">
        <string notr="true">background:rgba(255,255,255,.5);</string>
       </property>
       <property name="text">
-       <string>&lt;</string>
+       <string>Back</string>
       </property>
      </widget>
      <widget class="QGroupBox" name="groupBox_7">
@@ -1442,7 +1442,8 @@ color: rgb(255, 255, 255);</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background:rgba(255,255,255,.5);</string>
+       <string notr="true">background:rgba(255,255,255,.5);
+</string>
       </property>
       <property name="text">
        <string>Load Item List</string>
@@ -1472,22 +1473,22 @@ color: rgb(255, 255, 255);</string>
      <widget class="QPushButton" name="pushButton_23">
       <property name="geometry">
        <rect>
-        <x>950</x>
-        <y>220</y>
-        <width>41</width>
-        <height>101</height>
+        <x>920</x>
+        <y>520</y>
+        <width>71</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>26</pointsize>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="styleSheet">
        <string notr="true">background:rgba(255,255,255,.5);</string>
       </property>
       <property name="text">
-       <string>&gt;</string>
+       <string>Next</string>
       </property>
      </widget>
     </widget>
@@ -1575,22 +1576,22 @@ color: rgb(255, 255, 255);</string>
      <widget class="QPushButton" name="pushButton_24">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>220</y>
-        <width>41</width>
-        <height>101</height>
+        <x>830</x>
+        <y>520</y>
+        <width>81</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>26</pointsize>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="styleSheet">
        <string notr="true">background:rgba(255,255,255,.5);</string>
       </property>
       <property name="text">
-       <string>&lt;</string>
+       <string>Back</string>
       </property>
      </widget>
     </widget>
