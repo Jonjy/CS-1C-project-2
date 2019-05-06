@@ -96,6 +96,8 @@ private slots:
 
     void statusSelect();
 
+    void nameSelect();
+
     void on_pushButton_23_clicked();
 
     void on_pushButton_24_clicked();
@@ -112,6 +114,8 @@ private:
     void itemCombo();
 
     void statusCombo();
+
+    void nameCombo();
 
     void tableMake(QSqlQuery * qry);
 

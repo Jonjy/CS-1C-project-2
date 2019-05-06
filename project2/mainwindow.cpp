@@ -478,22 +478,15 @@ void MainWindow::on_pushButton_24_clicked()
 }
 
 void MainWindow::managerLogin(){
-    if(ui->lineEdit->text() != "pass"){
-        QMessageBox::information(this, "Error",
-                            "Incorrect user name or password",
-                            QMessageBox::Ok);
-        return;
-    }
 
-
-    ui->stackedWidget->setCurrentIndex(2);
+    ui->stackedWidget->setCurrentIndex(5);
     opendb();
 
     dayCombo();
-
     idCombo();
-
     itemCombo();
+    statusCombo();
+    nameCombo();
 
     QSqlQuery * qry = new QSqlQuery(mydb);
     QString item = ui->ItemBox->currentText();
@@ -517,6 +510,7 @@ void MainWindow::tableMake(QSqlQuery * qry){
     ui->managerView->setColumnWidth(1,75);
     ui->managerView->setColumnWidth(2,200);
     ui->managerView->setColumnWidth(3,75);
+    ui->managerView->setColumnWidth(4,75);
 }
 
 void MainWindow::dayCombo(){
@@ -531,6 +525,19 @@ void MainWindow::dayCombo(){
     return;
 }
 
+
+void MainWindow::nameCombo(){
+    QSqlQuery * qry = new QSqlQuery(mydb);
+
+    QSqlQueryModel * combo = new QSqlQueryModel();
+
+    qry->prepare("select Name from customers ORDER BY Name ASC");
+    qry->exec();
+
+    combo->setQuery(*qry);
+
+    ui->NameBox->setModel(combo);
+}
 
 void MainWindow::idCombo(){
     QSqlQuery * qry = new QSqlQuery(mydb);
@@ -560,9 +567,9 @@ void MainWindow::itemCombo(){
 }
 
 void MainWindow::statusCombo(){
-    ui->DayBox->addItem("All Customers");
-    ui->DayBox->addItem("Executive");
-    ui->DayBox->addItem("Regular");
+    ui->statusBox->addItem("All Customers");
+    ui->statusBox->addItem("Executive");
+    ui->statusBox->addItem("Regular");
 }
 
 void MainWindow::daySelect(){
@@ -576,6 +583,24 @@ void MainWindow::daySelect(){
         day=day.at(4);
         qry->prepare("select * from sales WHERE day = '"+day+"'");
     }
+    qry->exec();
+
+    tableMake(qry);
+}
+
+void MainWindow::nameSelect(){
+
+    QSqlQuery * qry = new QSqlQuery(mydb);
+    QString name = ui->NameBox->currentText();
+
+    qry->prepare("select ID from customers WHERE Name '"+name+"'");
+    qry->exec();
+    QString id= qry->value(1).toString();
+
+    QString quer ="select * from sales WHERE ID = '"+id+"'";
+    qDebug()<<(id);
+    qry->prepare(quer);
+
     qry->exec();
 
     tableMake(qry);
@@ -608,10 +633,13 @@ void MainWindow::itemSelect(){
 
 void MainWindow::statusSelect(){
     QSqlQuery * qry = new QSqlQuery(mydb);
-    QString item = ui->ItemBox->currentText();
+    QString item = ui->statusBox->currentText();
 
-
-    qry->prepare("select * from sales WHERE Product = '"+item+"'");
+    if(item == "Executive" || item == "Regualar"){
+        qry->prepare("select * from sales WHERE status = '"+item+"'");
+    }else{
+        qry->prepare("select * from sales");
+    }
 
     qry->exec();
 
