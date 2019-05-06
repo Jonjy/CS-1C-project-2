@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1001</width>
-    <height>603</height>
+    <height>602</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
      <string notr="true">background-image: url(:/photos/photos/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg);</string>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="page">
      <property name="styleSheet">
@@ -1611,7 +1611,7 @@ color: rgb(255, 255, 255);</string>
        <rect>
         <x>30</x>
         <y>519</y>
-        <width>981</width>
+        <width>971</width>
         <height>51</height>
        </rect>
       </property>
@@ -1630,9 +1630,9 @@ color: rgb(255, 255, 255);</string>
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_13">
+        <widget class="QPushButton" name="stockButt">
          <property name="text">
-          <string>Stock Screen</string>
+          <string>View Stock</string>
          </property>
         </widget>
        </item>
@@ -1650,29 +1650,9 @@ color: rgb(255, 255, 255);</string>
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="custButt">
          <property name="text">
-          <string>Customer Screen</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer_7">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_7">
-         <property name="text">
-          <string>Customer info</string>
+          <string>View Customers</string>
          </property>
         </widget>
        </item>
@@ -1690,7 +1670,7 @@ color: rgb(255, 255, 255);</string>
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_5">
+        <widget class="QPushButton" name="itemSbutt">
          <property name="text">
           <string>Sort By Item</string>
          </property>
@@ -1710,14 +1690,14 @@ color: rgb(255, 255, 255);</string>
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_12">
+        <widget class="QPushButton" name="IdSbutt">
          <property name="text">
           <string>Sort By ID</string>
          </property>
         </widget>
        </item>
        <item>
-        <spacer name="horizontalSpacer">
+        <spacer name="horizontalSpacer_4">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -1730,9 +1710,29 @@ color: rgb(255, 255, 255);</string>
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_11">
+        <widget class="QPushButton" name="searchButt">
          <property name="text">
-          <string>Reset</string>
+          <string>Search</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="resetButt">
+         <property name="text">
+          <string>Reset Fields</string>
          </property>
         </widget>
        </item>
@@ -1750,7 +1750,7 @@ color: rgb(255, 255, 255);</string>
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="logoutButt">
          <property name="text">
           <string>logout</string>
          </property>
@@ -1781,6 +1781,93 @@ color: rgb(255, 255, 255);</string>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Quantity sold</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="SoldEdit"/>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>Total Sales</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_35">
+           <property name="text">
+            <string> $ </string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="salesEdit"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_36">
+         <property name="text">
+          <string>Executive:          /          Regular:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLineEdit" name="execEdit"/>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="regEdit"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_8">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
        <item>
         <widget class="QLabel" name="label_10">
          <property name="text">
@@ -1884,52 +1971,6 @@ color: rgb(255, 255, 255);</string>
         <widget class="QComboBox" name="statusBox"/>
        </item>
        <item>
-        <spacer name="verticalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>Quantity sold</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="IDEdit"/>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_7">
-         <property name="text">
-          <string>Total Sales</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="statusEdit"/>
-       </item>
-       <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1987,18 +2028,18 @@ color: rgb(255, 255, 255);</string>
    </hints>
   </connection>
   <connection>
-   <sender>DayBox</sender>
+   <sender>NameBox</sender>
    <signal>currentIndexChanged(int)</signal>
    <receiver>MainWindow</receiver>
-   <slot>daySelect()</slot>
+   <slot>nameSelect()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>859</x>
-     <y>71</y>
+     <x>921</x>
+     <y>322</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1004</x>
-     <y>105</y>
+     <x>995</x>
+     <y>171</y>
     </hint>
    </hints>
   </connection>
@@ -2009,60 +2050,124 @@ color: rgb(255, 255, 255);</string>
    <slot>idSelect()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>870</x>
-     <y>222</y>
+     <x>847</x>
+     <y>386</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1004</x>
-     <y>216</y>
+     <x>996</x>
+     <y>234</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>ItemBox</sender>
-   <signal>currentIndexChanged(int)</signal>
+   <sender>logoutButt</sender>
+   <signal>released()</signal>
    <receiver>MainWindow</receiver>
-   <slot>itemSelect()</slot>
+   <slot>logout()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>870</x>
-     <y>293</y>
+     <x>910</x>
+     <y>563</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1005</x>
-     <y>281</y>
+     <x>922</x>
+     <y>579</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>statusBox</sender>
-   <signal>currentIndexChanged(int)</signal>
+   <sender>searchButt</sender>
+   <signal>released()</signal>
    <receiver>MainWindow</receiver>
-   <slot>statusSelect()</slot>
+   <slot>Search()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>870</x>
-     <y>364</y>
+     <x>682</x>
+     <y>555</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1006</x>
-     <y>350</y>
+     <x>794</x>
+     <y>580</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>NameBox</sender>
-   <signal>currentIndexChanged(int)</signal>
+   <sender>resetButt</sender>
+   <signal>released()</signal>
    <receiver>MainWindow</receiver>
-   <slot>nameSelect()</slot>
+   <slot>reset()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>921</x>
-     <y>140</y>
+     <x>815</x>
+     <y>565</y>
     </hint>
     <hint type="destinationlabel">
-     <x>995</x>
-     <y>171</y>
+     <x>865</x>
+     <y>577</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>itemSbutt</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>itemSort()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>449</x>
+     <y>550</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>488</x>
+     <y>577</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>IdSbutt</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>idSort()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>590</x>
+     <y>563</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>569</x>
+     <y>580</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>stockButt</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>displayStock()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>98</x>
+     <y>554</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>130</x>
+     <y>579</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>custButt</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>displayCustomers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>222</x>
+     <y>552</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>253</x>
+     <y>581</y>
     </hint>
    </hints>
   </connection>
@@ -2074,5 +2179,12 @@ color: rgb(255, 255, 255);</string>
   <slot>itemSelect()</slot>
   <slot>statusSelect()</slot>
   <slot>nameSelect()</slot>
+  <slot>Search()</slot>
+  <slot>logout()</slot>
+  <slot>reset()</slot>
+  <slot>itemSort()</slot>
+  <slot>idSort()</slot>
+  <slot>displayStock()</slot>
+  <slot>displayCustomers()</slot>
  </slots>
 </ui>

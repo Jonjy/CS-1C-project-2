@@ -98,9 +98,25 @@ private slots:
 
     void nameSelect();
 
+    void reset();
+
+    void idSort();
+
+    void itemSort();
+
     void on_pushButton_23_clicked();
 
     void on_pushButton_24_clicked();
+
+public slots:
+
+    void Search();
+
+    void logout();
+
+    void displayStock();
+
+    void displayCustomers();
 
 private:
     Ui::MainWindow *ui;

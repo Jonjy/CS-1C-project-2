@@ -4,6 +4,7 @@
 #include <QtSql>
 #include <QDebug>
 #include <ctime>
+#include <QList>
 
 /*NOTES*
  *make selecting membership a dropdown box
@@ -507,16 +508,36 @@ void MainWindow::managerLogin(){
 
 void MainWindow::tableMake(QSqlQuery * qry){
     QSqlQueryModel * modal = new QSqlQueryModel();
-
+    float items=0, revenue=0;
+    int exec=0, reg=0;
     modal->setQuery(*qry);
     ui->managerView->setModel(modal);
 
     qDebug() << (modal->rowCount());
     ui->managerView->setColumnWidth(0,100);
-    ui->managerView->setColumnWidth(1,75);
+    ui->managerView->setColumnWidth(1,74);
     ui->managerView->setColumnWidth(2,200);
-    ui->managerView->setColumnWidth(3,75);
-    ui->managerView->setColumnWidth(4,75);
+    ui->managerView->setColumnWidth(3,80);
+    ui->managerView->setColumnWidth(4,73);
+    ui->managerView->setColumnWidth(5,73);
+    qry->first();
+
+    while(qry->next()){
+        if(qry->value(6).toString() == "Executive"){
+            exec++;
+        }else{
+            reg++;
+        }
+        items += qry->value(4).toFloat();
+        revenue +=qry->value(3).toFloat()*qry->value(4).toFloat();
+
+    }
+    qDebug()<<(items);
+    qDebug()<<(revenue);
+    ui->SoldEdit->setText(QString::number(items));
+    ui->salesEdit->setText(QString::number(revenue,'f',2));
+    ui->execEdit->setText(QString::number(exec));
+    ui->regEdit->setText(QString::number(reg));
 }
 
 void MainWindow::dayCombo(){
@@ -535,41 +556,53 @@ void MainWindow::dayCombo(){
 void MainWindow::nameCombo(){
     QSqlQuery * qry = new QSqlQuery(mydb);
 
-    QSqlQueryModel * combo = new QSqlQueryModel();
-
     qry->prepare("select Name from customers ORDER BY Name ASC");
     qry->exec();
 
-    combo->setQuery(*qry);
+    QList<QString> list;
 
-    ui->NameBox->setModel(combo);
+    list.append("All customers");
+
+    while(qry->next()){
+        list.append(qry->value(0).toString());
+    }
+
+    ui->NameBox->addItems(list);
 }
 
 void MainWindow::idCombo(){
     QSqlQuery * qry = new QSqlQuery(mydb);
 
-    QSqlQueryModel * combo = new QSqlQueryModel();
 
     qry->prepare("select ID from customers ORDER BY ID ASC");
     qry->exec();
 
-    combo->setQuery(*qry);
+    QList<QString> list;
 
-    ui->IDBox->setModel(combo);
+    list.append("All customers");
+
+    while(qry->next()){
+        list.append(qry->value(0).toString());
+    }
+
+    ui->IDBox->addItems(list);
 }
 
 void MainWindow::itemCombo(){
     QSqlQuery * qry = new QSqlQuery(mydb);
 
-    QSqlQueryModel * combo = new QSqlQueryModel();
-
     qry->prepare("select Item from stock");
     qry->exec();
 
-    combo->setQuery(*qry);
+    QList<QString> list;
 
-    ui->ItemBox->setModel(combo);
+    list.append("All Items");
 
+    while(qry->next()){
+        list.append(qry->value(0).toString());
+    }
+
+    ui->ItemBox->addItems(list);
 }
 
 void MainWindow::statusCombo(){
@@ -599,17 +632,19 @@ void MainWindow::nameSelect(){
     QSqlQuery * qry = new QSqlQuery(mydb);
     QString name = ui->NameBox->currentText();
 
-    qry->prepare("select ID from customers WHERE Name '"+name+"'");
-    qry->exec();
-    QString id= qry->value(1).toString();
+    if (name == "All customers"){
+        ui->IDBox->setCurrentText("All customers");
+        return;
+    }
 
-    QString quer ="select * from sales WHERE ID = '"+id+"'";
-    qDebug()<<(id);
+    QString quer ="select ID from customers WHERE Name = '"+name+"'";
+    qDebug()<<(quer);
     qry->prepare(quer);
-
     qry->exec();
+    qDebug()<<qry->first();
+    QString id= qry->value(0).toString();
 
-    tableMake(qry);
+    ui->IDBox->setCurrentText(id);
 }
 
 void MainWindow::idSelect(){
@@ -617,12 +652,18 @@ void MainWindow::idSelect(){
     QSqlQuery * qry = new QSqlQuery(mydb);
     QString id = ui->IDBox->currentText();
 
+    if(id == "All customers"){
+        ui->NameBox->setCurrentText("All customers");
+        return;
+    }
 
-    qry->prepare("select * from sales WHERE ID = '"+id+"'");
-
+    QString quer ="select Name from customers WHERE Id ='"+id+"'";
+    qDebug()<<(quer);
+    qry->prepare(quer);
     qry->exec();
-
-    tableMake(qry);
+    qDebug()<<qry->first();
+    QString name= qry->value(0).toString();
+    ui->NameBox->setCurrentText(name);
 }
 
 void MainWindow::itemSelect(){
@@ -652,3 +693,206 @@ void MainWindow::statusSelect(){
     tableMake(qry);
 }
 
+void MainWindow::Search(){
+    qDebug()<<("here i am");
+    QSqlQuery * qry = new QSqlQuery(mydb);
+    QString line = "select * from sales";
+    bool added = false;
+    QString where = " where ";
+
+    if(ui->DayBox->currentText() != "Select Day"){
+        added = true;
+        line += where;
+        line += "Day = '";
+        line += ui->DayBox->currentText().at(4);
+        line += "'";
+    }
+    if(ui->IDBox->currentText() != "All customers"){
+        if(added){
+            line += " AND ";
+        }else{
+            added = true;
+            line += where;
+        }
+        line += "ID = '";
+        line += ui->IDBox->currentText();
+        line += "'";
+    }
+    if(ui->ItemBox->currentText() != "All Items"){
+        if(added){
+            line += " AND ";
+        }else{
+            added = true;
+            line += where;
+        }
+        line += "Product = '";
+        line += ui->ItemBox->currentText();
+        line += "'";
+    }
+    if(ui->statusBox->currentText() != "All Customers"){
+        if(added){
+            line += " AND ";
+        }else{
+            added = true;
+            line += where;
+        }
+        line += "[Member Status] = '";
+        line += ui->statusBox->currentText();
+        line += "'";
+    }
+
+
+    qDebug()<<(line);
+    qry->exec(line);
+    tableMake(qry);
+
+}
+
+void MainWindow::reset(){
+    ui->NameBox->setCurrentIndex(0);
+    ui->IDBox->setCurrentIndex(0);
+    ui->statusBox->setCurrentIndex(0);
+    ui->ItemBox->setCurrentIndex(0);
+    ui->DayBox->setCurrentIndex(0);
+}
+
+void MainWindow::idSort(){
+    qDebug()<<("here i am");
+    QSqlQuery * qry = new QSqlQuery(mydb);
+    QString line = "select * from sales";
+    bool added = false;
+    QString where = " where ";
+
+    if(ui->DayBox->currentText() != "Select Day"){
+        added = true;
+        line += where;
+        line += "Day = '";
+        line += ui->DayBox->currentText().at(4);
+        line += "'";
+    }
+    if(ui->IDBox->currentText() != "All customers"){
+        if(added){
+            line += " AND ";
+        }else{
+            added = true;
+            line += where;
+        }
+        line += "ID = '";
+        line += ui->IDBox->currentText();
+        line += "'";
+    }
+    if(ui->ItemBox->currentText() != "All Items"){
+        if(added){
+            line += " AND ";
+        }else{
+            added = true;
+            line += where;
+        }
+        line += "Product = '";
+        line += ui->ItemBox->currentText();
+        line += "'";
+    }
+    if(ui->statusBox->currentText() != "All Customers"){
+        if(added){
+            line += " AND ";
+        }else{
+            added = true;
+            line += where;
+        }
+        line += "[Member Status] = '";
+        line += ui->statusBox->currentText();
+        line += "'";
+    }
+
+    line += " ORDER by ID ASC";
+
+    qDebug()<<(line);
+    qry->exec(line);
+    tableMake(qry);
+
+}
+
+void MainWindow::itemSort(){
+    qDebug()<<("here i am");
+    QSqlQuery * qry = new QSqlQuery(mydb);
+    QString line = "select * from sales";
+    bool added = false;
+    QString where = " where ";
+
+    if(ui->DayBox->currentText() != "Select Day"){
+        added = true;
+        line += where;
+        line += "Day = '";
+        line += ui->DayBox->currentText().at(4);
+        line += "'";
+    }
+    if(ui->IDBox->currentText() != "All customers"){
+        if(added){
+            line += " AND ";
+        }else{
+            added = true;
+            line += where;
+        }
+        line += "ID = '";
+        line += ui->IDBox->currentText();
+        line += "'";
+    }
+    if(ui->ItemBox->currentText() != "All Items"){
+        if(added){
+            line += " AND ";
+        }else{
+            added = true;
+            line += where;
+        }
+        line += "Product = '";
+        line += ui->ItemBox->currentText();
+        line += "'";
+    }
+    if(ui->statusBox->currentText() != "All Customers"){
+        if(added){
+            line += " AND ";
+        }else{
+            added = true;
+            line += where;
+        }
+        line += "[Member Status] = '";
+        line += ui->statusBox->currentText();
+        line += "'";
+    }
+
+    line += " ORDER by Product ASC";
+    qDebug()<<(line);
+    qry->exec(line);
+    tableMake(qry);
+
+}
+
+void MainWindow::displayStock(){
+    QSqlQueryModel * modal = new QSqlQueryModel();
+
+    QSqlQuery * qry = new QSqlQuery(mydb);
+
+    qry->prepare("SELECT * from stock");
+
+    qry->exec();
+    modal->setQuery(*qry);
+    ui->managerView->setModel(modal);
+}
+
+void MainWindow::displayCustomers(){
+    QSqlQueryModel * modal = new QSqlQueryModel();
+
+    QSqlQuery * qry = new QSqlQuery(mydb);
+
+    qry->prepare("SELECT * from customers");
+
+    qry->exec();
+    modal->setQuery(*qry);
+    ui->managerView->setModel(modal);
+}
+
+
+void MainWindow::logout(){
+    ui->stackedWidget->setCurrentIndex(0);
+    closedb();
+}
