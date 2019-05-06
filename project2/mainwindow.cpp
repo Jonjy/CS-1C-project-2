@@ -450,27 +450,33 @@ void MainWindow::on_pushButton_22_clicked()
 void MainWindow::on_pushButton_23_clicked()
 {
    ui->stackedWidget->setCurrentIndex(4);
-   //ASSUME THERE IS A COLUMN IN SQL CALLED rebate AND runningTotal//
-   //if an exec is not getting more than 55 dollars in rebate they should swap to regular
 
+   MainWindow db, db2;
 
-   MainWindow db;
    QSqlQueryModel * model = new QSqlQueryModel();
+   QSqlQueryModel * model2 = new QSqlQueryModel();
 
    db.opendb();
-   QSqlQuery * qry = new QSqlQuery(db.mydb);
+   db2.opendb();
 
-   qry->prepare("select * from customers where (status = 'Executive') AND (rebate<55) "); //* selects all
+   QSqlQuery * qry = new QSqlQuery(db.mydb);
+   QSqlQuery * qry2 = new QSqlQuery(db2.mydb);
+
+   qry->prepare("select * from customers where (status = 'Executive') AND (rebate<55) ");
+   qry2->prepare("select * from customers where (status = 'Regular') AND (runningTotal > 2750) ");
 
    qry->exec();
-   model->setQuery(*qry);
+   qry2->exec();
 
-   ui->tableView_3->setModel(model);//regular to exec
+   model->setQuery(*qry);
+   model2->setQuery(*qry2);
+
+   ui->tableView_3->setModel(model);//exec to regular
+   ui->tableView_4->setModel(model2);//regular to exec
 
    db.closedb();
-
+   db2.closedb();
 }
-
 void MainWindow::on_pushButton_24_clicked()
 {
     ui->stackedWidget->setCurrentIndex(3);
