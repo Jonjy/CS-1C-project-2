@@ -213,7 +213,6 @@ void MainWindow::on_pushButton_8_clicked()//add member
     qry.prepare("INSERT INTO customers (name,ID,status,expiration) values ('"+name+"','"+id+"', '"+membership+"', '"+date+"') ");
 
     if(qry.exec()){
-        QMessageBox::critical(this, tr("Add"),tr("Entry added"));
         db.closedb();
     }
     else{
@@ -309,7 +308,6 @@ void MainWindow::on_pushButton_14_clicked() //delete item
     qry.prepare("DELETE FROM stock WHERE Item = '"+item+"' ");
 
     if(qry.exec()){
-        QMessageBox::critical(this, tr("Delete"),tr("Deleted"));
         db.closedb();
     }
     else{
@@ -396,8 +394,8 @@ void MainWindow::on_pushButton_20_clicked()//edit id
 
 void MainWindow::on_pushButton_21_clicked()//edit status
 {
-    QString name = ui->comboBox_5->currentText();
-    QString status = ui->lineEdit_5->text();
+    QString name = ui->comboBox_4->currentText();
+    QString status = ui->comboBox_5->currentText();
     MainWindow db;
 
     if(!db.opendb()){
@@ -421,9 +419,9 @@ void MainWindow::on_pushButton_21_clicked()//edit status
     refreshcustomerdb();
 }
 
-void MainWindow::on_pushButton_22_clicked()
+void MainWindow::on_pushButton_22_clicked() //edit exp date
 {
-    QString name = ui->comboBox_5->currentText();
+    QString name = ui->comboBox_4->currentText();
 
     QString month = ui->comboBox_6->currentText();
     QString day = ui->comboBox_7->currentText();
@@ -448,7 +446,7 @@ void MainWindow::on_pushButton_22_clicked()
     ui->comboBox_8->setCurrentIndex(0);
 }
 
-void MainWindow::on_pushButton_23_clicked()
+void MainWindow::on_pushButton_23_clicked() //suggested membership swaps
 {
    ui->stackedWidget->setCurrentIndex(4);
 
@@ -463,8 +461,8 @@ void MainWindow::on_pushButton_23_clicked()
    QSqlQuery * qry = new QSqlQuery(db.mydb);
    QSqlQuery * qry2 = new QSqlQuery(db2.mydb);
 
-   qry->prepare("select * from customers where (status = 'Executive') AND (rebate<55) ");
-   qry2->prepare("select * from customers where (status = 'Regular') AND (runningTotal > 2750) ");
+   qry->prepare("select * from customers where (status = 'Executive') AND (`rebate amount` < 55) ");
+   qry2->prepare("select * from customers where (status = 'Regular') AND (`purchase total` > 2750) ");
 
    qry->exec();
    qry2->exec();

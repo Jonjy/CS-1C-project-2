@@ -30,7 +30,7 @@
      <string notr="true">background-image: url(:/photos/photos/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg);</string>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="page">
      <property name="styleSheet">
@@ -1551,7 +1551,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
-       <string>Should swap from Regular to Executive</string>
+       <string>Should swap from Executive to Regular</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_33">
@@ -1577,7 +1577,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
-       <string>Should swap from Executive to Regular</string>
+       <string>Should swap from Regular to Executive</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_24">
