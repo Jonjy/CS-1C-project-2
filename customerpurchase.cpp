@@ -24,9 +24,15 @@ void CustomerPurchase::on_pushButton_clicked()
 
     db.connOpen();
     QSqlQuery query;
-    query.prepare("select price from stock where Item = '"+item+"'");
+    QString prepareStatment = "select price from stock where Item = '"+item+"'";
+    qDebug()<<prepareStatment;
+    query.prepare(prepareStatment);
+    if(query.isActive()) qDebug()<<"Query succesful";
+    else {
+        qDebug()<<"Query unsuccesful";
+    }
     query.exec();
-   // query.bindValue(0,"price");
+    query.bindValue(0,"price");
 
     price = query.value(0).toDouble();
     total = price * amount;
@@ -35,7 +41,14 @@ void CustomerPurchase::on_pushButton_clicked()
     std::cout<< price << " " << total<< " "<< rebate;
     db.connClose();
 
-
+   /* db.connOpen();
+    QSqlQuery qry;
+    qry.prepare("select rebate from customers where ID = '"+customer+"'");
+    qry.exec();
+    double runningRebate = qry.first();
+    double newRebate = runningRebate + rebate;
+    qry.prepare("update customers set rebate = '"+newRebate+"' where ID = '"+customer+"'");
+*/
 }
 
 void CustomerPurchase::on_pushButton_3_clicked()
