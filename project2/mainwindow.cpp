@@ -499,6 +499,7 @@ void MainWindow::managerLogin(){
     itemCombo();
     statusCombo();
     nameCombo();
+    monthCombo();
 
     QSqlQuery * qry = new QSqlQuery(mydb);
     QString item = ui->ItemBox->currentText();
@@ -544,7 +545,7 @@ void MainWindow::tableMake(QSqlQuery * qry){
             reg++;
         }
         items += qry->value(4).toFloat();
-        revenue +=qry->value(3).toFloat()*qry->value(4).toFloat()*1.0775;
+        revenue +=qry->value(3).toFloat()*qry->value(4).toFloat();//*1.0775
 
     }
     qDebug()<<(items);
@@ -634,6 +635,21 @@ void MainWindow::statusCombo(){
     ui->statusBox->addItem("All Customers");
     ui->statusBox->addItem("Executive");
     ui->statusBox->addItem("Regular");
+}
+
+void MainWindow::monthCombo(){
+    ui->monthBox->addItem("January");
+    ui->monthBox->addItem("Febuary");
+    ui->monthBox->addItem("March");
+    ui->monthBox->addItem("April");
+    ui->monthBox->addItem("May");
+    ui->monthBox->addItem("June");
+    ui->monthBox->addItem("July");
+    ui->monthBox->addItem("August");
+    ui->monthBox->addItem("September");
+    ui->monthBox->addItem("October");
+    ui->monthBox->addItem("November");
+    ui->monthBox->addItem("December");
 }
 
 void MainWindow::daySelect(){
@@ -921,6 +937,63 @@ void MainWindow::displayCustomers(){
     ui->managerView->setColumnWidth(5,102);
 }
 
+void MainWindow::expiriningCustomers(){
+    QSqlQueryModel * modal = new QSqlQueryModel();
+
+    QSqlQuery * qry = new QSqlQuery(mydb);
+
+    QString fuckthisfuckingshit = ui->monthBox->currentText();
+
+    if(fuckthisfuckingshit == "January"){
+        fuckthisfuckingshit= "01";
+    }
+    if(fuckthisfuckingshit == "Febuary"){
+        fuckthisfuckingshit= "02";
+    }
+    if(fuckthisfuckingshit == "March"){
+        fuckthisfuckingshit= "03";
+    }
+    if(fuckthisfuckingshit == "April"){
+        fuckthisfuckingshit= "04";
+    }
+    if(fuckthisfuckingshit == "May"){
+        fuckthisfuckingshit= "05";
+    }
+    if(fuckthisfuckingshit == "June"){
+        fuckthisfuckingshit= "06";
+    }
+    if(fuckthisfuckingshit == "July"){
+        fuckthisfuckingshit= "07";
+    }
+    if(fuckthisfuckingshit == "August"){
+        fuckthisfuckingshit= "08";
+    }
+    if(fuckthisfuckingshit == "September"){
+        fuckthisfuckingshit= "09";
+    }
+    if(fuckthisfuckingshit == "October"){
+        fuckthisfuckingshit= "10";
+    }
+    if(fuckthisfuckingshit == "November"){
+        fuckthisfuckingshit= "11";
+    }
+    if(fuckthisfuckingshit == "December"){
+        fuckthisfuckingshit= "12";
+    }
+
+
+    qry->prepare("SELECT * from customers WHERE expiration LIKE '"+fuckthisfuckingshit+"%'");
+
+    qry->exec();
+    modal->setQuery(*qry);
+    ui->managerView->setModel(modal);
+    ui->managerView->setColumnWidth(0,202);
+    ui->managerView->setColumnWidth(1,102);
+    ui->managerView->setColumnWidth(2,102);
+    ui->managerView->setColumnWidth(3,102);
+    ui->managerView->setColumnWidth(4,102);
+    ui->managerView->setColumnWidth(5,102);
+}
 
 void MainWindow::logout(){
     ui->stackedWidget->setCurrentIndex(0);
@@ -940,8 +1013,6 @@ void MainWindow::dodo(){
     qry->exec();
 
     QList<QString> list;
-
-    list.append("All customers");
 
     if(qry->first()){
         list.append(qry->value(0).toString());
@@ -967,13 +1038,13 @@ void MainWindow::dodo(){
         revenue +=qry->value(3).toFloat()*qry->value(4).toFloat();
     }
 
-    QString bleh ="UPDATE customers SET [purchase total] = '"+ QString::number(revenue) +"' WHERE ID = "+id;
+    QString bleh ="UPDATE customers SET [purchase total] = '"+ QString::number(revenue,'f',2) +"' WHERE ID = "+id;
     qDebug()<<(bleh);
     qry->prepare(bleh);
     qry->exec();
 
 
-    bleh="UPDATE customers SET [rebate amount] = '"+ QString::number(revenue*0.2) +"' WHERE ID = "+id;
+    bleh="UPDATE customers SET [rebate amount] = '"+ QString::number(revenue*0.2,'f',2) +"' WHERE ID = "+id;
     qDebug()<<(bleh);
     qry->prepare(bleh);
     qry->exec();

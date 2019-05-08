@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1001</width>
-    <height>594</height>
+    <height>596</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1624,9 +1624,9 @@ color: rgb(255, 255, 255);</string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QPushButton" name="pushButton_26">
+        <widget class="QPushButton" name="pushButton_27">
          <property name="text">
-          <string>update</string>
+          <string>PushButton</string>
          </property>
         </widget>
        </item>
@@ -1667,6 +1667,26 @@ color: rgb(255, 255, 255);</string>
         <widget class="QPushButton" name="custButt">
          <property name="text">
           <string>View Customers</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_26">
+         <property name="text">
+          <string>Expiring Customer</string>
          </property>
         </widget>
        </item>
@@ -1985,6 +2005,29 @@ color: rgb(255, 255, 255);</string>
         <widget class="QComboBox" name="statusBox"/>
        </item>
        <item>
+        <spacer name="verticalSpacer_9">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_37">
+         <property name="text">
+          <string>Expiration Month</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="monthBox"/>
+       </item>
+       <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -2033,7 +2076,7 @@ color: rgb(255, 255, 255);</string>
    <hints>
     <hint type="sourcelabel">
      <x>921</x>
-     <y>322</y>
+     <y>296</y>
     </hint>
     <hint type="destinationlabel">
      <x>995</x>
@@ -2049,7 +2092,7 @@ color: rgb(255, 255, 255);</string>
    <hints>
     <hint type="sourcelabel">
      <x>847</x>
-     <y>386</y>
+     <y>352</y>
     </hint>
     <hint type="destinationlabel">
      <x>996</x>
@@ -2080,7 +2123,7 @@ color: rgb(255, 255, 255);</string>
    <slot>Search()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>636</x>
+     <x>687</x>
      <y>555</y>
     </hint>
     <hint type="destinationlabel">
@@ -2096,7 +2139,7 @@ color: rgb(255, 255, 255);</string>
    <slot>reset()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>784</x>
+     <x>802</x>
      <y>565</y>
     </hint>
     <hint type="destinationlabel">
@@ -2112,8 +2155,8 @@ color: rgb(255, 255, 255);</string>
    <slot>itemSort()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>423</x>
-     <y>550</y>
+     <x>499</x>
+     <y>568</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
@@ -2128,7 +2171,7 @@ color: rgb(255, 255, 255);</string>
    <slot>idSort()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
+     <x>597</x>
      <y>563</y>
     </hint>
     <hint type="destinationlabel">
@@ -2144,8 +2187,8 @@ color: rgb(255, 255, 255);</string>
    <slot>displayStock()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>169</x>
-     <y>554</y>
+     <x>128</x>
+     <y>568</y>
     </hint>
     <hint type="destinationlabel">
      <x>130</x>
@@ -2160,7 +2203,7 @@ color: rgb(255, 255, 255);</string>
    <slot>displayCustomers()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>282</x>
+     <x>248</x>
      <y>552</y>
     </hint>
     <hint type="destinationlabel">
@@ -2205,15 +2248,31 @@ color: rgb(255, 255, 255);</string>
    <sender>pushButton_26</sender>
    <signal>released()</signal>
    <receiver>MainWindow</receiver>
+   <slot>expiriningCustomers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>357</x>
+     <y>561</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>381</x>
+     <y>579</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_27</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
    <slot>dodo()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>36</x>
-     <y>558</y>
+     <x>58</x>
+     <y>561</y>
     </hint>
     <hint type="destinationlabel">
-     <x>22</x>
-     <y>639</y>
+     <x>49</x>
+     <y>670</y>
     </hint>
    </hints>
   </connection>
@@ -2233,5 +2292,6 @@ color: rgb(255, 255, 255);</string>
   <slot>displayStock()</slot>
   <slot>displayCustomers()</slot>
   <slot>dodo()</slot>
+  <slot>expiriningCustomers()</slot>
  </slots>
 </ui>

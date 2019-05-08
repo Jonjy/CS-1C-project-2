@@ -16,6 +16,7 @@ class MainWindow : public QMainWindow
 
 public:
     QSqlDatabase mydb;
+
     bool opendb(){
         QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
         mydb.setDatabaseName("sales.db.db");
@@ -85,24 +86,6 @@ private slots:
     void on_pushButton_21_clicked();
 
     void on_pushButton_22_clicked();
-	
-	 void managerLogin();
-
-    void daySelect();
-
-    void idSelect();
-
-    void itemSelect();
-
-    void statusSelect();
-
-    void nameSelect();
-
-    void reset();
-
-    void idSort();
-
-    void itemSort();
 
     void on_pushButton_23_clicked();
 
@@ -120,10 +103,29 @@ public slots:
 
     void dodo();
 
-private:
-    Ui::MainWindow *ui;
+    void managerLogin();
 
-    void manTablefill();
+   void daySelect();
+
+   void idSelect();
+
+   void itemSelect();
+
+   void statusSelect();
+
+   void nameSelect();
+
+   void reset();
+
+   void idSort();
+
+   void itemSort();
+
+   void expiriningCustomers();
+
+private:
+
+    Ui::MainWindow *ui;
 
     void dayCombo();
 
@@ -135,7 +137,11 @@ private:
 
     void nameCombo();
 
+    void monthCombo();
+
     void tableMake(QSqlQuery * qry);
+
+
 
 };
 
