@@ -13,6 +13,9 @@ CustomerPurchase::~CustomerPurchase()
     delete ui;
 }
 
+//complete purchase button 
+//updates the customer's rebate 
+//updates the stock of the item
 void CustomerPurchase::on_pushButton_clicked()
 {
     CustomerPurchase db;
@@ -32,25 +35,60 @@ void CustomerPurchase::on_pushButton_clicked()
         qDebug()<<"Query unsuccesful";
     }
 
-    //query.bindValue(0,"price");
+
     query.first();
     price = query.value(0).toDouble();
     total = price * amount;
-    rebate = total * .02;
+    rebate = total * (0.02);
 
-    std::cout<< price << " " << total<< " "<< rebate;
+    qDebug()<<price<<" "<<total<<" "<< rebate;
     db.connClose();
 
-   /* db.connOpen();
+    db.connOpen();
     QSqlQuery qry;
     qry.prepare("select rebate from customers where ID = '"+customer+"'");
-    qry.exec();
-    double runningRebate = qry.first();
+    if(qry.exec()) qDebug()<<"Qry succesful";
+    else{
+        qDebug()<<"Qry unsuccesful";
+    }
+    qry.first();
+    double runningRebate = qry.value(0).toDouble();
     double newRebate = runningRebate + rebate;
-    qry.prepare("update customers set rebate = '"+newRebate+"' where ID = '"+customer+"'");
-*/
+    qDebug()<<runningRebate<<" "<<newRebate;
+    db.connClose();
+
+    db.connOpen();
+    QSqlQuery query2;
+    QString whatthefuck = "update customers set rebate = '"+QString::number(newRebate,'f',2)+"' where ID = '"+customer+"'";
+    query2.prepare(whatthefuck);
+    qDebug()<< whatthefuck;
+    if(query2.exec()) qDebug()<<"success!";
+    else qDebug()<<"Not succesful!";
+    db.connClose();
+
+
+    db.connOpen();
+    QSqlQuery Qry2;
+    Qry2.prepare("select count from stock where Item = '"+item+"'");
+    if(Qry2.exec()) qDebug()<<"Qry2 success!";
+    else qDebug()<<"Qry2 unsuccesful!";
+    Qry2.first();
+
+    int amnt = ui->spinBox->value();
+    int runningCount = Qry2.value(0).toInt();
+    int newCount = runningCount - amnt;
+    qDebug()<<runningCount;
+    db.connClose();
+
+   db.connOpen();
+   QSqlQuery query3;
+   query3.prepare("update stock set count = '"+QString::number(newCount,'f',0)+"' where Item = '"+item+"'");
+   if(query3.exec()) qDebug()<<"query3 success!";
+   else qDebug()<<"querry3 unsuccesful!";
+    db.connClose();
 }
 
+//load database to table-view
 void CustomerPurchase::on_pushButton_3_clicked()
 {
     CustomerPurchase db;
@@ -67,3 +105,4 @@ void CustomerPurchase::on_pushButton_3_clicked()
     ui->tableView->setModel(model);
     db.connClose();
 }
+
