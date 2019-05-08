@@ -485,7 +485,12 @@ void MainWindow::on_pushButton_24_clicked()
 }
 
 void MainWindow::managerLogin(){
-
+    if(ui->lineEdit->text() != "manager"){
+        ui->label_4->setText("Password is incorrect");
+        //QMessageBox::information(this, "Login", "Password is incorrect");
+        return;
+    }
+    ui->lineEdit->clear();
     ui->stackedWidget->setCurrentIndex(5);
     opendb();
 
@@ -499,7 +504,7 @@ void MainWindow::managerLogin(){
     QString item = ui->ItemBox->currentText();
 
 
-    qry->prepare("select * from sales");
+    qry->prepare("select * from sales ORDER BY Day ASC");
 
     qry->exec();
 
@@ -522,7 +527,7 @@ void MainWindow::tableMake(QSqlQuery * qry){
     ui->managerView->setColumnWidth(5,73);
     qry->first();
 
-    while(qry->next()){
+    if(qry->first()){
         if(qry->value(6).toString() == "Executive"){
             exec++;
         }else{
@@ -530,6 +535,16 @@ void MainWindow::tableMake(QSqlQuery * qry){
         }
         items += qry->value(4).toFloat();
         revenue +=qry->value(3).toFloat()*qry->value(4).toFloat();
+
+    }
+    while(qry->next()){
+        if(qry->value(6).toString() == "Executive"){
+            exec++;
+        }else{
+            reg++;
+        }
+        items += qry->value(4).toFloat();
+        revenue +=qry->value(3).toFloat()*qry->value(4).toFloat()*1.0775;
 
     }
     qDebug()<<(items);
@@ -563,6 +578,9 @@ void MainWindow::nameCombo(){
 
     list.append("All customers");
 
+    if(qry->first()){
+        list.append(qry->value(0).toString());
+    }
     while(qry->next()){
         list.append(qry->value(0).toString());
     }
@@ -581,6 +599,9 @@ void MainWindow::idCombo(){
 
     list.append("All customers");
 
+    if(qry->first()){
+        list.append(qry->value(0).toString());
+    }
     while(qry->next()){
         list.append(qry->value(0).toString());
     }
@@ -597,6 +618,10 @@ void MainWindow::itemCombo(){
     QList<QString> list;
 
     list.append("All Items");
+
+    if(qry->first()){
+        list.append(qry->value(0).toString());
+    }
 
     while(qry->next()){
         list.append(qry->value(0).toString());
@@ -694,7 +719,6 @@ void MainWindow::statusSelect(){
 }
 
 void MainWindow::Search(){
-    qDebug()<<("here i am");
     QSqlQuery * qry = new QSqlQuery(mydb);
     QString line = "select * from sales";
     bool added = false;
@@ -738,7 +762,7 @@ void MainWindow::Search(){
         }
         line += "[Member Status] = '";
         line += ui->statusBox->currentText();
-        line += "'";
+        line += "' ORDER BY Day ASC";
     }
 
 
@@ -889,10 +913,69 @@ void MainWindow::displayCustomers(){
     qry->exec();
     modal->setQuery(*qry);
     ui->managerView->setModel(modal);
+    ui->managerView->setColumnWidth(0,202);
+    ui->managerView->setColumnWidth(1,102);
+    ui->managerView->setColumnWidth(2,102);
+    ui->managerView->setColumnWidth(3,102);
+    ui->managerView->setColumnWidth(4,102);
+    ui->managerView->setColumnWidth(5,102);
 }
 
 
 void MainWindow::logout(){
     ui->stackedWidget->setCurrentIndex(0);
     closedb();
+    ui->DayBox->clear();
+    ui->NameBox->clear();
+    ui->IDBox->clear();
+    ui->ItemBox->clear();
+    ui->statusBox->clear();
+}
+
+void MainWindow::dodo(){
+    QSqlQuery * qry = new QSqlQuery(mydb);
+
+
+    qry->prepare("select ID from customers ORDER BY ID ASC");
+    qry->exec();
+
+    QList<QString> list;
+
+    list.append("All customers");
+
+    if(qry->first()){
+        list.append(qry->value(0).toString());
+    }
+    while(qry->next()){
+        list.append(qry->value(0).toString());
+    }
+
+    for(QList<QString>::iterator it = list.begin();it != list.end();it++){
+    QString id= *it;
+    qry->exec("select * from sales WHERE ID = "+ id);
+
+
+    float revenue=0;
+    qry->first();
+
+    if(qry->first()){
+        if(qry->value(6).toString() == "Executive"){
+        revenue +=qry->value(3).toFloat()*qry->value(4).toFloat();
+        }
+    }
+    while(qry->next()){
+        revenue +=qry->value(3).toFloat()*qry->value(4).toFloat();
+    }
+
+    QString bleh ="UPDATE customers SET [purchase total] = '"+ QString::number(revenue) +"' WHERE ID = "+id;
+    qDebug()<<(bleh);
+    qry->prepare(bleh);
+    qry->exec();
+
+
+    bleh="UPDATE customers SET [rebate amount] = '"+ QString::number(revenue*0.2) +"' WHERE ID = "+id;
+    qDebug()<<(bleh);
+    qry->prepare(bleh);
+    qry->exec();
+    }
 }

@@ -118,6 +118,8 @@ public slots:
 
     void displayCustomers();
 
+    void dodo();
+
 private:
     Ui::MainWindow *ui;
 

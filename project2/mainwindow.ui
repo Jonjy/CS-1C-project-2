@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1001</width>
-    <height>602</height>
+    <height>594</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -42,9 +42,9 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>750</x>
+        <x>730</x>
         <y>330</y>
-        <width>221</width>
+        <width>241</width>
         <height>171</height>
        </rect>
       </property>
@@ -86,32 +86,6 @@ background-color: rgb(255, 255, 255);</string>
        </property>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>140</y>
-         <width>75</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Login</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="geometry">
-        <rect>
-         <x>110</x>
-         <y>140</y>
-         <width>75</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Exit</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_2">
@@ -156,6 +130,39 @@ background-color: rgb(255, 255, 255);</string>
        <property name="text">
         <string/>
        </property>
+      </widget>
+      <widget class="QWidget" name="horizontalLayoutWidget_4">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>129</y>
+         <width>241</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Admin</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_25">
+          <property name="text">
+           <string>Manager</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>Exit</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </widget>
@@ -1617,6 +1624,13 @@ color: rgb(255, 255, 255);</string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
+        <widget class="QPushButton" name="pushButton_26">
+         <property name="text">
+          <string>update</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="horizontalSpacer_9">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -2012,22 +2026,6 @@ color: rgb(255, 255, 255);</string>
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton_10</sender>
-   <signal>released()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>managerLogin()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>760</x>
-     <y>493</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>733</x>
-     <y>580</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>NameBox</sender>
    <signal>currentIndexChanged(int)</signal>
    <receiver>MainWindow</receiver>
@@ -2082,7 +2080,7 @@ color: rgb(255, 255, 255);</string>
    <slot>Search()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>682</x>
+     <x>636</x>
      <y>555</y>
     </hint>
     <hint type="destinationlabel">
@@ -2098,7 +2096,7 @@ color: rgb(255, 255, 255);</string>
    <slot>reset()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>815</x>
+     <x>784</x>
      <y>565</y>
     </hint>
     <hint type="destinationlabel">
@@ -2114,7 +2112,7 @@ color: rgb(255, 255, 255);</string>
    <slot>itemSort()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>449</x>
+     <x>423</x>
      <y>550</y>
     </hint>
     <hint type="destinationlabel">
@@ -2130,7 +2128,7 @@ color: rgb(255, 255, 255);</string>
    <slot>idSort()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>590</x>
+     <x>530</x>
      <y>563</y>
     </hint>
     <hint type="destinationlabel">
@@ -2146,7 +2144,7 @@ color: rgb(255, 255, 255);</string>
    <slot>displayStock()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>98</x>
+     <x>169</x>
      <y>554</y>
     </hint>
     <hint type="destinationlabel">
@@ -2162,12 +2160,60 @@ color: rgb(255, 255, 255);</string>
    <slot>displayCustomers()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>222</x>
+     <x>282</x>
      <y>552</y>
     </hint>
     <hint type="destinationlabel">
      <x>253</x>
      <y>581</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_10</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>managerLogin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>760</x>
+     <y>493</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>733</x>
+     <y>580</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_25</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>managerLogin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>853</x>
+     <y>501</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>994</x>
+     <y>517</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_26</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>dodo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>36</x>
+     <y>558</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>22</x>
+     <y>639</y>
     </hint>
    </hints>
   </connection>
@@ -2186,5 +2232,6 @@ color: rgb(255, 255, 255);</string>
   <slot>idSort()</slot>
   <slot>displayStock()</slot>
   <slot>displayCustomers()</slot>
+  <slot>dodo()</slot>
  </slots>
 </ui>
