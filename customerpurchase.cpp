@@ -27,12 +27,12 @@ void CustomerPurchase::on_pushButton_clicked()
     QString prepareStatment = "select price from stock where Item = '"+item+"'";
     qDebug()<<prepareStatment;
     query.prepare(prepareStatment);
-    if(query.isActive()) qDebug()<<"Query succesful";
+    if(query.exec()) qDebug()<<"Query succesful";
     else {
         qDebug()<<"Query unsuccesful";
     }
-    query.exec();
-    query.bindValue(0,"price");
+
+    //query.bindValue(0,"price");
 
     price = query.value(0).toDouble();
     total = price * amount;
