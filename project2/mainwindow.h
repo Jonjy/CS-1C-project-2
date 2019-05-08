@@ -5,6 +5,9 @@
 #include <QMainWindow>
 #include <QDebug>
 #include <QFileInfo>
+#include "admin2.h"
+#include "customerpurchase.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -123,6 +126,10 @@ public slots:
 
    void expiriningCustomers();
 
+   void topu();
+
+   void topu2();
+
 private:
 
     Ui::MainWindow *ui;
@@ -141,6 +148,9 @@ private:
 
     void tableMake(QSqlQuery * qry);
 
+    admin2 * page;
+
+    CustomerPurchase * purch;
 
 
 };

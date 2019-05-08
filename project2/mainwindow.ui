@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1001</width>
-    <height>596</height>
+    <width>996</width>
+    <height>595</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
      <string notr="true">background-image: url(:/photos/photos/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg);</string>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="page">
      <property name="styleSheet">
@@ -1088,6 +1088,38 @@ color: rgb(255, 255, 255);</string>
        <string>Next</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="pushButton_28">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>520</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background:rgba(255,255,255,.5);</string>
+      </property>
+      <property name="text">
+       <string>Create Purchase</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_29">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>520</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background:rgba(255,255,255,.5);</string>
+      </property>
+      <property name="text">
+       <string>Update Inventory</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="page_4">
      <widget class="QPushButton" name="pushButton_16">
@@ -1503,9 +1535,9 @@ color: rgb(255, 255, 255);</string>
      <widget class="QTableView" name="tableView_3">
       <property name="geometry">
        <rect>
-        <x>70</x>
+        <x>50</x>
         <y>170</y>
-        <width>431</width>
+        <width>451</width>
         <height>211</height>
        </rect>
       </property>
@@ -1517,9 +1549,9 @@ color: rgb(255, 255, 255);</string>
      <widget class="QTableView" name="tableView_4">
       <property name="geometry">
        <rect>
-        <x>540</x>
+        <x>520</x>
         <y>170</y>
-        <width>451</width>
+        <width>471</width>
         <height>211</height>
        </rect>
       </property>
@@ -1583,7 +1615,7 @@ color: rgb(255, 255, 255);</string>
      <widget class="QPushButton" name="pushButton_24">
       <property name="geometry">
        <rect>
-        <x>830</x>
+        <x>910</x>
         <y>520</y>
         <width>81</width>
         <height>31</height>
@@ -1602,6 +1634,7 @@ color: rgb(255, 255, 255);</string>
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="page_6"/>
     <widget class="QWidget" name="manager">
      <widget class="QTableView" name="managerView">
       <property name="geometry">
@@ -2050,7 +2083,7 @@ color: rgb(255, 255, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1001</width>
+     <width>996</width>
      <height>21</height>
     </rect>
    </property>
@@ -2095,7 +2128,7 @@ color: rgb(255, 255, 255);</string>
      <y>352</y>
     </hint>
     <hint type="destinationlabel">
-     <x>996</x>
+     <x>995</x>
      <y>234</y>
     </hint>
    </hints>
@@ -2272,7 +2305,39 @@ color: rgb(255, 255, 255);</string>
     </hint>
     <hint type="destinationlabel">
      <x>49</x>
-     <y>670</y>
+     <y>594</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_28</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>topu()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>43</x>
+     <y>553</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>73</x>
+     <y>709</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_29</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>topu2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>198</x>
+     <y>552</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>180</x>
+     <y>659</y>
     </hint>
    </hints>
   </connection>
@@ -2293,5 +2358,7 @@ color: rgb(255, 255, 255);</string>
   <slot>displayCustomers()</slot>
   <slot>dodo()</slot>
   <slot>expiriningCustomers()</slot>
+  <slot>topu()</slot>
+  <slot>topu2()</slot>
  </slots>
 </ui>

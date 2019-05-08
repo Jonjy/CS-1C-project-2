@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "admin2.h"
+#include "customerpurchase.h"
 #include <QMessageBox>
 #include <QtSql>
 #include <QDebug>
@@ -119,7 +121,7 @@ void MainWindow::on_pushButton_clicked()
     QString pass = ui->lineEdit->text();
 
     if(pass == "password"){
-        ui->stackedWidget->setCurrentIndex(1);
+        ui->stackedWidget->setCurrentIndex(2);
         ui->lineEdit->clear();
         ui->label_4->clear();
     }
@@ -182,7 +184,7 @@ void MainWindow::on_pushButton_6_clicked() //delete user from database
 
 void MainWindow::on_pushButton_7_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
 void MainWindow::on_pushButton_8_clicked()//add member
@@ -489,7 +491,7 @@ void MainWindow::managerLogin(){
         return;
     }
     ui->lineEdit->clear();
-    ui->stackedWidget->setCurrentIndex(5);
+    ui->stackedWidget->setCurrentIndex(6);
     opendb();
 
     dayCombo();
@@ -710,7 +712,7 @@ void MainWindow::itemSelect(){
     QString item = ui->ItemBox->currentText();
 
 
-    qry->prepare("select * from sales WHERE Product = '"+item+"'");
+    qry->prepare("select * from sales WHERE Product = :val");
 
     qry->exec();
 
@@ -763,9 +765,10 @@ void MainWindow::Search(){
             added = true;
             line += where;
         }
-        line += "Product = '";
-        line += ui->ItemBox->currentText();
-        line += "'";
+        line += "Product = \"";
+        QString hat=ui->ItemBox->currentText();
+        line += hat;
+        line += "\"";
     }
     if(ui->statusBox->currentText() != "All Customers"){
         if(added){
@@ -826,9 +829,9 @@ void MainWindow::idSort(){
             added = true;
             line += where;
         }
-        line += "Product = '";
+        line += "Product = \"";
         line += ui->ItemBox->currentText();
-        line += "'";
+        line += "\"";
     }
     if(ui->statusBox->currentText() != "All Customers"){
         if(added){
@@ -882,9 +885,9 @@ void MainWindow::itemSort(){
             added = true;
             line += where;
         }
-        line += "Product = '";
+        line += "Product = \"";
         line += ui->ItemBox->currentText();
-        line += "'";
+        line += "\"";
     }
     if(ui->statusBox->currentText() != "All Customers"){
         if(added){
@@ -1042,9 +1045,21 @@ void MainWindow::dodo(){
     qry->exec();
 
 
-    bleh="UPDATE customers SET [rebate amount] = '"+ QString::number(revenue*0.2,'f',2) +"' WHERE ID = "+id;
+    bleh="UPDATE customers SET [rebate amount] = '"+ QString::number(revenue*0.02,'f',2) +"' WHERE ID = "+id;
     qDebug()<<(bleh);
     qry->prepare(bleh);
     qry->exec();
     }
+}
+
+
+void MainWindow::topu(){
+
+    purch = new CustomerPurchase;
+    purch->show();
+}
+
+void MainWindow::topu2(){
+    page = new admin2;
+    page->show();
 }

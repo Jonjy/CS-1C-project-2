@@ -26,13 +26,22 @@ CONFIG += c++11
 
 SOURCES += \
         mainwindow.cpp \
-    main.cpp
+    main.cpp \
+    adminpage.cpp \
+    customerpurchase.cpp \
+    admin2.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    adminpage.h \
+    customerpurchase.h \
+    admin2.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    customerpurchase.ui \
+    adminpage.ui \
+    admin2.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -41,3 +50,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resource.qrc
+
+DISTFILES +=
