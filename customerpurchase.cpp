@@ -33,7 +33,7 @@ void CustomerPurchase::on_pushButton_clicked()
     }
 
     //query.bindValue(0,"price");
-
+    query.first();
     price = query.value(0).toDouble();
     total = price * amount;
     rebate = total * .02;
