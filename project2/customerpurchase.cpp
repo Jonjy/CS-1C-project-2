@@ -46,11 +46,14 @@ void CustomerPurchase::on_pushButton_clicked()
 
     db.connOpen();
     QSqlQuery qry;
-    qry.prepare("select [rebate amount] from customers where ID = '"+customer+"'");
+
+    QString test ="select [rebate amount] from customers where ID = '"+customer+"'";
+    qry.prepare(test);
     if(qry.exec()) qDebug()<<"Qry succesful";
     else{
-        qDebug()<<"Qry unsuccesful";
+        qDebug()<<(test);
     }
+
     qry.first();
     double runningRebate = qry.value(0).toDouble();
     double newRebate = runningRebate + rebate;
@@ -62,19 +65,24 @@ void CustomerPurchase::on_pushButton_clicked()
         qDebug()<<"Qry unsuccesful";
     }
     qry.first();
-    double newTotal= qry.value(0).toDouble() + rebate;
-    qDebug()<<runningRebate<<" "<<newRebate;
+    double newTotal= qry.value(0).toDouble() + total;
+    qDebug()<<newTotal<<" "<<total;
 
 
     QSqlQuery query2;
-    QString whatthefuck = "update customers set [rebate amount] = '"+QString::number(newRebate,'f',2)+"', [purchase total] = '"+QString::number(newTotal,'f',2)+"' where ID = '"+customer+"'";
-    query2.prepare(whatthefuck);
-    qDebug()<< whatthefuck;
+    QString what = "update customers set [rebate amount] = '"+QString::number(newRebate,'f',2)+"', [purchase total] = '"+QString::number(newTotal,'f',2)+"' where ID = '"+customer+"'";
+    query2.prepare(what);
+    qDebug()<< what;
     if(query2.exec()) qDebug()<<"success!";
     else qDebug()<<"Not succesful!";
 
-    query2.exec("insert into sales (ID, Product, Price, Quatity)"
-                " values( '"+customer+ "', '" +item+"', '"+price+"', '"+amount+") ");
+    QString jon ="insert into sales (ID, Product, Price, Quantity)"
+                " values( '"+customer+ "', '" +item+"', '"+ QString::number(price)+"', '"+QString::number(amount)+"') ";
+    qDebug() << (jon);
+
+    if(!query2.exec(jon)){
+        qDebug()<<"fail at jon";
+    }
 
     QSqlQuery Qry2;
     Qry2.prepare("select count from stock where Item = '"+item+"'");

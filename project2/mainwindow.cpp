@@ -565,6 +565,7 @@ void MainWindow::dayCombo(){
     ui->DayBox->addItem("Day 5");
     ui->DayBox->addItem("Day 6");
     ui->DayBox->addItem("Day 7");
+    ui->DayBox->addItem("Day 8");
     return;
 }
 
@@ -943,47 +944,47 @@ void MainWindow::expiriningCustomers(){
 
     QSqlQuery * qry = new QSqlQuery(mydb);
 
-    QString fuckthisfuckingshit = ui->monthBox->currentText();
+    QString that = ui->monthBox->currentText();
 
-    if(fuckthisfuckingshit == "January"){
-        fuckthisfuckingshit= "01";
+    if(that == "January"){
+        that= "01";
     }
-    if(fuckthisfuckingshit == "Febuary"){
-        fuckthisfuckingshit= "02";
+    if(that == "Febuary"){
+        that= "02";
     }
-    if(fuckthisfuckingshit == "March"){
-        fuckthisfuckingshit= "03";
+    if(that == "March"){
+        that= "03";
     }
-    if(fuckthisfuckingshit == "April"){
-        fuckthisfuckingshit= "04";
+    if(that== "April"){
+        that= "04";
     }
-    if(fuckthisfuckingshit == "May"){
-        fuckthisfuckingshit= "05";
+    if(that == "May"){
+        that= "05";
     }
-    if(fuckthisfuckingshit == "June"){
-        fuckthisfuckingshit= "06";
+    if(that == "June"){
+        that= "06";
     }
-    if(fuckthisfuckingshit == "July"){
-        fuckthisfuckingshit= "07";
+    if(that == "July"){
+        that= "07";
     }
-    if(fuckthisfuckingshit == "August"){
-        fuckthisfuckingshit= "08";
+    if(that == "August"){
+        that= "08";
     }
-    if(fuckthisfuckingshit == "September"){
-        fuckthisfuckingshit= "09";
+    if(that == "September"){
+        that= "09";
     }
-    if(fuckthisfuckingshit == "October"){
-        fuckthisfuckingshit= "10";
+    if(that == "October"){
+        that= "10";
     }
-    if(fuckthisfuckingshit == "November"){
-        fuckthisfuckingshit= "11";
+    if(that == "November"){
+        that= "11";
     }
-    if(fuckthisfuckingshit == "December"){
-        fuckthisfuckingshit= "12";
+    if(that == "December"){
+        that= "12";
     }
 
 
-    qry->prepare("SELECT * from customers WHERE expiration LIKE '"+fuckthisfuckingshit+"%'");
+    qry->prepare("SELECT * from customers WHERE expiration LIKE '"+that+"%'");
 
     qry->exec();
     modal->setQuery(*qry);
@@ -1028,7 +1029,8 @@ void MainWindow::dodo(){
 
 
     float revenue=0;
-    qry->first();
+    if(!(qry->first()))
+        return;
 
     if(qry->first()){
         if(qry->value(6).toString() == "Executive"){

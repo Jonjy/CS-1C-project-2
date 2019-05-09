@@ -28,7 +28,7 @@ void admin2::on_pushButton_clicked()
     db.connOpen();
     QSqlQuery query;
 
-    query.prepare("insert into inventory (itemname, stock, price) values ('"+item+"', '"+amount+"', '"+price+"')");
+    query.prepare("insert into stock (Item, price, count) values ('"+item+"', '"+amount+"', '"+price+"')");
 
     if(query.exec()){
         qDebug()<<"Changes Made";
@@ -49,7 +49,7 @@ void admin2::on_pushButton_2_clicked()
     db.connOpen();
     QSqlQuery * qry = new QSqlQuery();
 
-    qry->prepare("select * from inventory"); //* selects all
+    qry->prepare("select * from stock"); //* selects all
 
     qry->exec();
     model->setQuery(*qry);
@@ -69,7 +69,7 @@ void admin2::on_pushButton_3_clicked()
     admin2 db;
     db.connOpen();
     QSqlQuery qry;
-    qry.prepare("update inventory set stock='"+quantity+"', Price = '"+price+"' where itemname = '"+name+"'");
+    qry.prepare("update stock set count='"+quantity+"', price = '"+price+"' where Item = '"+name+"'");
     qry.exec();
     db.connClose();
 }
